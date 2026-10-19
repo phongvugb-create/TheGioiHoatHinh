@@ -1,0 +1,292 @@
+
+/* CÀI ĐẶT CHUNG */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f8;
+    color: #222;
+}
+
+/* HEADER CỐ ĐỊNH */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 80px;
+    padding: 15px 5%;
+    background-color: #172554;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/* Ô TÌM KIẾM */
+.search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.search-box input {
+    width: 230px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-box button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #facc15;
+    color: #172554;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #fde68a;
+}
+
+/* MENU ĐIỀU HƯỚNG */
+.head-link {
+    margin-top: 80px;
+    padding: 15px 5%;
+    background-color: #2563eb;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.head-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    transition: color 0.2s;
+}
+
+.head-link a:hover {
+    color: #facc15;
+    font-weight: bold;
+}
+
+/* BỐ CỤC NỘI DUNG */
+.content {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 25px 5%;
+}
+
+/* CỘT DANH SÁCH PHIM */
+.left-content {
+    width: 280px;
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.left-content h2 {
+    margin-top: 0;
+    font-size: 21px;
+}
+
+.left-content label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.left-content select {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.movie-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.movie {
+    margin-bottom: 10px;
+}
+
+.movie-button {
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    color: #1e293b;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.movie-button span {
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.movie-button:hover {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+/* CỘT XEM VIDEO */
+.right-content {
+    flex: 1;
+    min-width: 0;
+    padding: 24px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.right-content h1 {
+    margin-top: 0;
+    color: #172554;
+}
+
+.description {
+    color: #64748b;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    margin: 20px 0;
+    background-color: #000;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.right-content video {
+    display: block;
+    width: 100%;
+    max-height: 480px;
+    margin-top: 15px;
+    background-color: #000;
+    border-radius: 8px;
+}
+
+.note {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* FOOTER */
+footer {
+    padding: 22px 15px;
+    background-color: #172554;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* RESPONSIVE: TABLET */
+@media (max-width: 900px) {
+    .header {
+        padding: 15px 3%;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .search-box input {
+        width: 170px;
+    }
+
+    .content {
+        padding: 20px 3%;
+        gap: 15px;
+    }
+
+    .left-content {
+        width: 230px;
+    }
+
+    .right-content {
+        padding: 18px;
+    }
+}
+
+/* RESPONSIVE: ĐIỆN THOẠI */
+@media (max-width: 650px) {
+    .header {
+        position: relative;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .head-link {
+        margin-top: 0;
+        gap: 18px;
+        padding: 14px 5%;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .left-content,
+    .right-content {
+        width: 100%;
+    }
+
+    .right-content {
+        padding: 16px;
+    }
+}

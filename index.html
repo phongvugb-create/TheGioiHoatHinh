@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thế Giới Hoạt Hình</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">🎬 Thế Giới Hoạt Hình</div>
+        <div class="search-box">
+            <input type="text" id="searchInput"
+                   placeholder="Tìm phim theo tên...">
+            <button id="searchButton">Tìm kiếm</button>
+        </div>
+    </header>
+
+    <!-- MENU ĐIỀU HƯỚNG -->
+    <nav class="head-link">
+        <a href="#home">Trang chủ</a>
+        <a href="#movies">Danh sách phim</a>
+        <a href="#player">Xem phim</a>
+        <a href="#footer">Liên hệ</a>
+    </nav>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <div class="content" id="home">
+
+        <!-- DANH SÁCH PHIM BÊN TRÁI -->
+        <aside class="left-content" id="movies">
+            <h2>📺 Danh sách phim</h2>
+
+            <label for="sortSelect">Sắp xếp phim:</label>
+            <select id="sortSelect">
+                <option value="newest">Mới cập nhật</option>
+                <option value="views">Nhiều lượt xem</option>
+            </select>
+
+            <ul class="movie-list" id="movieList">
+                <li class="movie"
+                    data-title="Big Buck Bunny"
+                    data-date="20261018"
+                    data-views="950"
+                    data-video="YE7VzlLtp-4">
+                    <button class="movie-button"
+                            data-video="YE7VzlLtp-4"
+                            data-title="Big Buck Bunny">
+                        🐰 Big Buck Bunny
+                        <span>Hoạt hình 3D</span>
+                    </button>
+                </li>
+
+                <li class="movie"
+                    data-title="Sint el"
+                    data-date="20261015"
+                    data-views="1200"
+                    data-video="eRsGyueVLvQ">
+                    <button class="movie-button"
+                            data-video="eRsGyueVLvQ"
+                            data-title="Sintel">
+                        🐉 Sintel
+                        <span>Phiêu lưu</span>
+                    </button>
+                </li>
+
+                <li class="movie"
+                    data-title="Elephants Dream"
+                    data-date="20261010"
+                    data-views="700"
+                    data-video="Tl0DMTlwL7U">
+                    <button class="movie-button"
+                            data-video="Tl0DMTlwL7U"
+                            data-title="Elephants Dream">
+                        🤖 Elephants Dream
+                        <span>Khoa học viễn tưởng</span>
+                    </button>
+                </li>
+            </ul>
+
+            <p id="noResults" hidden>Không tìm thấy phim phù hợp.</p>
+        </aside>
+
+        <!-- KHU VỰC XEM PHIM BÊN PHẢI -->
+        <main class="right-content" id="player">
+            <h1 id="currentTitle">Big Buck Bunny</h1>
+            <p class="description">
+                Chọn một phim trong danh sách để phát video.
+            </p>
+
+            <div class="video-container">
+                <iframe
+                    id="youtubePlayer"
+                    src="https://www.youtube-nocookie.com/embed/YE7VzlLtp-4"
+                    title="Trình phát phim hoạt hình"
+                    allow="accelerometer; autoplay; clipboard-write;
+                           encrypted-media; gyroscope; picture-in-picture;
+                           web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <h2>🎞️ Phát video từ tệp riêng</h2>
+            <p>
+                Nếu có video hoạt hình được phép sử dụng, bạn có thể
+                đặt tệp MP4 vào thư mục videos để phát tại đây.
+            </p>
+
+            <video controls preload="metadata" width="100%">
+                <source src="videos/phim-hoat-hinh.mp4" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ thẻ video.
+            </video>
+
+            <p class="note">
+                Lưu ý: Hãy thay đường dẫn MP4 mẫu bằng tệp video của bạn.
+            </p>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <p>© 2026 Thế Giới Hoạt Hình | Website học tập HTML & CSS</p>
+        <p>Nội dung video thuộc về chủ sở hữu tương ứng.</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const searchButton = document.getElementById("searchButton");
+        const sortSelect = document.getElementById("sortSelect");
+        const movieList = document.getElementById("movieList");
+        const noResults = document.getElementById("noResults");
+
+        function updateMovies() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            const movies = Array.from(movieList.querySelectorAll(".movie"));
+
+            movies.sort((a, b) => {
+                if (sortSelect.value === "views") {
+                    return Number(b.dataset.views) - Number(a.dataset.views);
+                }
+                return Number(b.dataset.date) - Number(a.dataset.date);
+            });
+
+            movies.forEach(movie => movieList.appendChild(movie));
+
+            let visibleCount = 0;
+
+            movies.forEach(movie => {
+                const title = movie.dataset.title.toLowerCase();
+                const matches = title.includes(keyword);
+                movie.hidden = !matches;
+                if (matches) visibleCount++;
+            });
+
+            noResults.hidden = visibleCount !== 0;
+        }
+
+        searchButton.addEventListener("click", updateMovies);
+
+        searchInput.addEventListener("input", updateMovies);
+
+        searchInput.addEventListener("keydown", event => {
+            if (event.key === "Enter") updateMovies();
+        });
+
+        sortSelect.addEventListener("change", updateMovies);
+
+        movieList.addEventListener("click", event => {
+            const button = event.target.closest(".movie-button");
+            if (!button) return;
+
+            const videoId = button.dataset.video;
+            const title = button.dataset.title;
+
+            document.getElementById("youtubePlayer").src =
+                "https://www.youtube-nocookie.com/embed/" + videoId;
+
+            document.getElementById("currentTitle").textContent = title;
+        });
+
+        updateMovies();
+    </script>
+</body>
+</html>
